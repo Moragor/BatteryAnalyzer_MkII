@@ -1,7 +1,7 @@
 //Author: Moragor
-//Version: 1.0.0
+//Version: 1.0.1
 //Created: 05-May-2020
-//Last edited: 18-Dec-2020
+//Last edited: 06-Mar-2021
 //License: MIT license (X11, see bottom)
 
 
@@ -160,8 +160,8 @@ void testAmp()      //In this function the test current is set.
       while (digitalRead(buttonPinUp) == LOW) {       //While the button is held this loop repeats.
         while (digitalRead(buttonPinUp) == LOW && millis() - tPressed1 >= 750) {      //This loop goes active when the button is held for 750ms.
           hold1 = 1;      //Shows that the "auto" mode was used for later.
-          amp += 5;       //While the button is held for 750ms+ the test current raises by 5mAh every ~50ms.
-          if (amp > 600)  //This if statement limits the max current to 600mAh and keeps the power bellow what my MOSFET heatsink can handle when testing a 1S LiPo.
+          amp += 5;       //While the button is held for 750ms+ the test current raises by 5mA every ~50ms.
+          if (amp > 600)  //This if statement limits the max current to 600mA and keeps the power bellow what my MOSFET heatsink can handle when testing a 1S LiPo.
           {
             amp = 600;
           }
@@ -171,7 +171,7 @@ void testAmp()      //In this function the test current is set.
       }
     }
     //When the button is released it gets checked if "auto" mode was used.
-    //If not the test current is raised by 5mAh.
+    //If not the test current is raised by 5mA.
     //If yes the "auto" indicator is reset and the current isn't raised an additional time.
     if (digitalRead(buttonPinUp) == HIGH && lastButtonState1 == LOW && hold1 == 0) {
       amp += 5;
@@ -342,10 +342,10 @@ void ampDisplay()        //This is the display for the test current selection
   display.setTextSize(2);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
-  display.println(F("Select mAh"));
+  display.println(F("Select mA"));
   display.setCursor(0, 25);
   display.print(amp );
-  display.print("mAh");
+  display.print("mA");
 
   if (sdMissing) {
     display.setTextSize(1);
